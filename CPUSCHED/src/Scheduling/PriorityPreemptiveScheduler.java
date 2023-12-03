@@ -17,32 +17,27 @@ public class PriorityPreemptiveScheduler {
     public PriorityPreemptiveScheduler(LinkedList<Process> processQueue) {
 
         // Stores processes from processQueue when they have reached their arrivalTime
-        LinkedList<Process> arrivedQueue = new LinkedList<>();
+        LinkedList<Process> readyQueue = new LinkedList<>();
 
-        while (numProcesses < 500 || !arrivedQueue.isEmpty()) {
+        while (numProcesses < 500 || !readyQueue.isEmpty()) {
 
             numProcesses += 1;
 
             // Check if there are processes arriving at the current time
             while (!processQueue.isEmpty() && processQueue.peek().getArrivalTime() == totalElapsedTime) {
                 Process arrivingProcess = processQueue.poll();
-                arrivedQueue.add(arrivingProcess);
+                readyQueue.add(arrivingProcess);
             }
 
-            // If there are processes in arrivedQueue, find the one with the shortest burst time
-            if (!arrivedQueue.isEmpty()) {
-                Process currentProcess = arrivedQueue.getFirst();
+            // If there are processes in readyQueue, find the one with the highest priority
+            if (!readyQueue.isEmpty()) {
+                Process currentProcess = readyQueue.getFirst();
 
-                // Compare the currentProcess to processes in the arrivedQueue. If a process in the arrivedQueue has a
-                // shorter burst time than the currentProcess, set it as the currentProcess.
-                // If the two burst times are equal, sort based on priority.
-                for (Process process : arrivedQueue) {
-                    if (process.getBurstTime() < currentProcess.getBurstTime()) {
+                // Compare the currentProcess to processes in the readyQueue. If a process in the readyQueue has a
+                // shorter burst time than the currentProcess, preempt it as the currentProcess.
+                for (Process process : readyQueue) {
+                    if (process.getPriority() < currentProcess.getPriority()) {
                         currentProcess = process;
-                    } else if (process.getBurstTime() == currentProcess.getBurstTime()) {
-                        if (process.getPriority() < currentProcess.getPriority()) {
-                            currentProcess = process;
-                        }
                     }
                 }
 
@@ -56,9 +51,9 @@ public class PriorityPreemptiveScheduler {
                 processExecutionTime += 1;
                 currentProcess.setBurstTime(currentProcess.getBurstTime() - 1);
 
-                // If the burst time is completed, remove the process from arrivedQueue
+                // If the burst time is completed, remove the process from readyQueue
                 if (currentProcess.getBurstTime() == 0) {
-                    arrivedQueue.remove(currentProcess);
+                    readyQueue.remove(currentProcess);
                 }
             }
 
