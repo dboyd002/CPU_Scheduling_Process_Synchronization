@@ -24,7 +24,7 @@ public class FIFOScheduler {
 
             numProcesses += 1;
 
-            if (numProcesses >= 500) {
+            if (numProcesses > 500) {
                 break;
             }
 
@@ -61,6 +61,7 @@ public class FIFOScheduler {
         }
 
         // Set results members after all processes complete
+        numProcesses--;
         avgWaitTime /= numProcesses;
         throughput = (double) numProcesses / totalElapsedTime;
         throughput = Math.round(throughput * 100.0) / 100.0;
