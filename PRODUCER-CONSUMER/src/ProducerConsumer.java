@@ -45,7 +45,7 @@ public class ProducerConsumer {
         }
 
         // Sleep main thread
-        Thread.sleep(10000);
+        Thread.sleep(Integer.parseInt(args[0]));
 
         // Stop all producer threads
         for (Thread thread : producerList) {
