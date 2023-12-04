@@ -1,0 +1,24 @@
+**FIFO**
+Number of Processes: 500
+Total Time Elapsed: 14744
+Throughput: 0.03 processes completed per unit of burst time
+CPU Utilization: 71.61%
+Average Wait Time: 17
+Average Turnaround Time: 37
+Average Response Time: 9
+**SJF**
+Number of Processes: 500
+Total Time Elapsed: 14774
+Throughput: 0.03 processes completed per unit of burst time
+CPU Utilization: 71.58%
+Average Wait Time: 14
+Average Turnaround Time: 35.398
+Average Response Time: 5
+**Priority**
+Number of Processes: 500
+Total Time Elapsed: 500
+Throughput: 1.0 processes completed per unit of burst time
+CPU Utilization: 50.0%
+Average Wait Time: 8
+Average Turnaround Time: 8.9
+Average Response Time: 8

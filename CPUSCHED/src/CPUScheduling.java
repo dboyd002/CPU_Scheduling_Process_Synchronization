@@ -2,10 +2,12 @@ import Scheduling.FIFOScheduler;
 import Scheduling.PriorityPreemptiveScheduler;
 import Scheduling.ShortestJobFirstScheduler;
 import Scheduling.Parser;
-
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 
-public class Main {
+public class CPUScheduling {
 
     public static void main(String[] args) throws FileNotFoundException {
 
@@ -13,6 +15,13 @@ public class Main {
         Parser parser1 = new Parser(datafilePath);
         Parser parser2 = new Parser(datafilePath);
         Parser parser3 = new Parser(datafilePath);
+
+        String outputPath = "CPUSCHED/Output/output.txt";
+
+        File outputFile = new File(outputPath);
+
+        PrintStream filePrintStream = new PrintStream(new FileOutputStream(outputFile));
+        System.setOut(filePrintStream);
 
         FIFOScheduler fifoScheduler = new FIFOScheduler(parser1.getProcessQueue());
 
